@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    background-color: green;
+    text-align: center;
+    color: #fff;
+    height: 550px;
+    font-weight: bold;
+}
+.jack h1 {
+    font-size: 50px;
+    padding-top: 50px;
+    margin: 0;
+    color: #ffb223;
+}
+p {
+    font-size: 25px;
+    text-transform: capitalize;
+}
+#play-para{
+    font-style: italic;
+}
+#start-btn, #new-card {
+    background-color: darkred;
+    color: #fff;
+    text-decoration: none;
+    line-height: 40px;
+    display: block;
+    margin: 1% auto;
+    width: 150px;
+    border-radius: 10px;
+}
