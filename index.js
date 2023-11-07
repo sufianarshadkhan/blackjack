@@ -1,35 +1,74 @@
-let firstCard=12;
-let secondCard=9;
-let sum = firstCard + secondCard;
+let firstCard;
+let secondCard;
+let sum = 0;
+let card = [];
 let hasBlackJack = false;
-let isAlive=true;
+let isAlive = false;
 let message = "";
 
-let playPara = document.getElementById("play-para");
-let cardPara = document.getElementById("card-para");
-let sumPara = document.getElementById("sum-para");
 
-function startGame(){
-    cardPara.textContent = "Cards: " + firstCard + "  " + secondCard;
+let playPara = document.getElementById("play-para");
+let sumPara = document.getElementById("sum-para");
+let cardPara = document.getElementById("card-para");
+let playerOne = document.getElementById("player-one");
+
+let player = {
+    name:"sam",
+    chips: 145
+}
+
+playerOne.textContent = player.name + ": $" + player.chips;
+
+function startGame() {
+    isAlive = true;
+    firstCard = getRandomNumber();
+    secondCard = getRandomNumber();
+    hasBlackJack = false;
+    card = [firstCard, secondCard];
+    sum = firstCard + secondCard;
+    renderGame();
+}
+
+function renderGame() {
+  
     sumPara.textContent = "Sum: " + sum;
-    if(sum <= 20) {
-        message = "Do you want to draw the new card?";
-        hasBlackJack=false;
+    cardPara.textContent = "Cards: ";
+    for (let i = 0; i < card.length; i++) {
+
+        cardPara.textContent += card[i] + " ";
     }
-    else if(sum === 21){
-        message = "Congrats! You've got BlackJack";
-        hasBlackJack=true;
+    if (sum <= 20) {
+        message = "Will you draw a new card";
     }
-    else{
+    else if (sum === 21) {
+        message = "You've got blackjack";
+        hasBlackJack = true;
+    }
+    else {
         message = "You're out of the game";
-        hasBlackJack=false;
-        isAlive=false;
+        isAlive = false;
     }
     playPara.textContent = message;
 }
 
+function getRandomNumber() {
+    let randomNumber = Math.floor(Math.random() * 13) + 1;
+    if (randomNumber === 1) {
+        return 11;
+    }
+    else if (randomNumber > 10) {
+        return 10;
+    }
+    else{
+        return randomNumber;
+    }
+}
+
 function newCard(){
-    let thirdCard=2;
+   if(isAlive === true && hasBlackJack === false){
+    let thirdCard = getRandomNumber();
     sum += thirdCard;
-    startGame();
+    card.push(thirdCard);
+    renderGame();
+   }
 }
